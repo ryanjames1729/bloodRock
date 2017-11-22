@@ -1,4 +1,4 @@
-var raceStart = new Date("Nov 22, 2017 5:00:00");
+var raceStart = new Date("Nov 23, 2017 5:00:00");
 var x = setInterval(function(){
   var now = new Date();
   var distance = now.getTime() - raceStart.getTime();
