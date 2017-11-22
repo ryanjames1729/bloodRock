@@ -1,4 +1,4 @@
-var raceStart = new Date("Dec 9, 2017 5:00:00");
+var raceStart = new Date("Nov 23, 2017 5:00:00");
 var x = setInterval(function(){
   var now = new Date();
   var distance = now.getTime() - raceStart.getTime();
@@ -36,10 +36,10 @@ function ASadj(current, goal){
     var as2 = Math.floor(elapsed/current*goal);
   }
   else if (goal < 67){
-    var as2 = Math.floor(elapsed/current*goal*1.02);
+    var as2 = Math.floor(elapsed/current*goal*1.05);
   }
   else{
-    var as2 = Math.floor(elapsed/current*goal*1.05);
+    var as2 = Math.floor(elapsed/current*goal*1.2);
   }
   var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart.getHours())%24;
   var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart.getMinutes();
