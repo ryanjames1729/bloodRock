@@ -83,7 +83,7 @@ function terrace2(current){
   var as2 = Math.floor(elapsed/current*50.9);
   var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-1;
   var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
-  if (hours > 9){
+  if (hours > 9 && hours < 12){
     return true;
   }
   else if (hours == 9 && minutes > 0){
@@ -117,7 +117,7 @@ function peavine(current){
   var as2 = Math.floor(elapsed/current*50.9);
   var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-1;
   var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
-  if (hours > 14){
+  if (hours > 14 && hours < 18){
     return true;
   }
   else if (hours == 14 && minutes > 00){
@@ -134,7 +134,7 @@ function finish(current){
   var as2 = Math.floor(elapsed/current*50.9);
   var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-1;
   var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
-  if (hours > 16){
+  if (hours > 16 && hours < 20){
     return true;
   }
   else if (hours == 16 && minutes > 00){
