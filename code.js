@@ -4,12 +4,15 @@ var x = setInterval(function(){
   var distance = now.getTime() - raceStart.getTime();
 
   var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  if (distance < 0 and days == 0){
+    days = "-0"
+  }
   var hours = Math.abs(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
   var minutes = Math.abs(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
   var seconds = Math.abs(Math.floor((distance % (1000 * 60)) / 1000));
 
   document.getElementById("timer").innerHTML = "Race Time: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-  document.getElementById("clock").innerHTML = "Current Time: " + now.getHours() + ":" + digits(now.getMinutes());
+  document.getElementById("clock").innerHTML = "Current Time: " + now.getHours()-1 + ":" + digits(now.getMinutes());
 }, 1000);
 
 function digits(time){
