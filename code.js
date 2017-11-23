@@ -2,17 +2,24 @@ var raceStart = new Date("Nov 23, 2017 5:00:00");
 var x = setInterval(function(){
   var now = new Date();
   var distance = now.getTime() - raceStart.getTime();
-
-  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  if (distance < 0 and days == 0){
-    days = "-0"
+  if (distance/(1000*60*60*24) < 0 && distance/(1000*60*60*24) > -0.5){
+    var days = 0
   }
+  else{
+    var days = Math.abs(Math.floor(distance / (1000 * 60 * 60 * 24)));
+  }
+
+  console.log(distance/(1000*60*60*24));
   var hours = Math.abs(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
   var minutes = Math.abs(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
   var seconds = Math.abs(Math.floor((distance % (1000 * 60)) / 1000));
-
-  document.getElementById("timer").innerHTML = "Race Time: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
-  document.getElementById("clock").innerHTML = "Current Time: " + now.getHours()-1 + ":" + digits(now.getMinutes());
+  if (distance < 0){
+    document.getElementById("timer").innerHTML = "Race Time: -" + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  }
+  else{
+    document.getElementById("timer").innerHTML = "Race Time: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+  }
+  document.getElementById("clock").innerHTML = "Current Time: " + (now.getHours()-1) + ":" + digits(now.getMinutes());
 }, 1000);
 
 function digits(time){
