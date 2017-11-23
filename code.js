@@ -64,8 +64,8 @@ function cabins(current){
   var now = new Date();
   var elapsed = Math.floor(now.getTime() - raceStart_alt);
   var as2 = Math.floor(elapsed/current*50.9);
-  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-1;
-  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
+  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart_alt.getHours())%24;
+  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart_alt.getMinutes();
   if (hours > 0 && hours < 10){
     return true;
   }
@@ -80,9 +80,9 @@ function cabins(current){
 function terrace2(current){
   var now = new Date();
   var elapsed = Math.floor(now.getTime() - raceStart_alt);
-  var as2 = Math.floor(elapsed/current*50.9);
-  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-1;
-  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
+  var as2 = Math.floor(elapsed/current*79.5);
+  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart_alt.getHours())%24;
+  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart_alt.getMinutes();
   if (hours > 9 && hours < 12){
     return true;
   }
@@ -97,10 +97,10 @@ function terrace2(current){
 function highCrest(current){
   var now = new Date();
   var elapsed = Math.floor(now.getTime() - raceStart_alt);
-  var as2 = Math.floor(elapsed/current*50.9);
-  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-1;
-  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
-  if (hours >=12){
+  var as2 = Math.floor(elapsed/current*87.3);
+  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart_alt.getHours())%24;
+  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart_alt.getMinutes();
+  if (hours >=12 && hours < 16){
     return true;
   }
   else if (hours == 11 && minutes > 30){
@@ -114,9 +114,9 @@ function highCrest(current){
 function peavine(current){
   var now = new Date();
   var elapsed = Math.floor(now.getTime() - raceStart_alt);
-  var as2 = Math.floor(elapsed/current*50.9);
-  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-1;
-  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
+  var as2 = Math.floor(elapsed/current*93.8);
+  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart_alt.getHours())%24;
+  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart_alt.getMinutes();
   if (hours > 14 && hours < 18){
     return true;
   }
@@ -131,9 +131,9 @@ function peavine(current){
 function finish(current){
   var now = new Date();
   var elapsed = Math.floor(now.getTime() - raceStart_alt);
-  var as2 = Math.floor(elapsed/current*50.9);
-  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-1;
-  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
+  var as2 = Math.floor(elapsed/current*101.8);
+  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart_alt.getHours())%24;
+  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart_alt.getMinutes();
   if (hours > 16 && hours < 20){
     return true;
   }
