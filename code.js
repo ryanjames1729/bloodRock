@@ -1,7 +1,14 @@
-var raceStart = new Date("Nov 23, 2017 5:00:00");
+//var raceStart = new Date("Nov 23, 2017 5:00:00");
+console.log("begin...");
+var raceStart = Date.UTC(2017, 10, 23, 5, 0, 0, 0);
+console.log(raceStart);
 var x = setInterval(function(){
   var now = new Date();
-  var distance = now.getTime() - raceStart.getTime();
+  console.log("now: " + now);
+  var utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+  console.log("utc " + utc);
+  var distance = utc - raceStart;
+
   if (distance/(1000*60*60*24) < 0 && distance/(1000*60*60*24) > -0.5){
     var days = 0
   }
@@ -10,7 +17,7 @@ var x = setInterval(function(){
   }
 
   console.log(distance/(1000*60*60*24));
-  var hours = Math.abs(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
+  var hours = Math.abs(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-6;
   var minutes = Math.abs(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
   var seconds = Math.abs(Math.floor((distance % (1000 * 60)) / 1000));
   if (distance < 0){
@@ -19,7 +26,7 @@ var x = setInterval(function(){
   else{
     document.getElementById("timer").innerHTML = "Race Time: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }
-  document.getElementById("clock").innerHTML = "Current Time: " + (now.getHours()-1) + ":" + digits(now.getMinutes());
+  document.getElementById("clock").innerHTML = "Current Time: " + (now.getUTCHours()-6) + ":" + digits(now.getUTCMinutes());
 }, 1000);
 
 function digits(time){
