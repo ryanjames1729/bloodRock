@@ -1,6 +1,6 @@
-var raceStart_alt = new Date("Nov 23, 2017 5:00:00");
+var raceStart_alt = new Date("Dec 9, 2017 5:00:00");
 console.log("begin...");
-var raceStart = Date.UTC(2017, 10, 23, 5, 0, 0, 0);
+var raceStart = Date.UTC(2017, 11, 9, 5, 0, 0, 0);
 
 var x = setInterval(function(){
   var now = new Date();
@@ -21,7 +21,13 @@ var x = setInterval(function(){
   else{
     document.getElementById("timer").innerHTML = "Race Time: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
   }
-  document.getElementById("clock").innerHTML = "Current Time: " + (now.getUTCHours()-6) + ":" + digits(now.getUTCMinutes());
+  if (now.getUTCHours() > 5){
+    var now_hours = now.getUTCHours() - 6;
+  }
+  else {
+    var now_hours = now.getUTCHours() + 18;
+  }
+  document.getElementById("clock").innerHTML = "Current Time: " + now_hours + ":" + digits(now.getUTCMinutes());
 }, 1000);
 
 function digits(time){
