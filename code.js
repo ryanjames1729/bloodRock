@@ -1,6 +1,6 @@
-var raceStart_alt = new Date("Nov 23, 2017 5:00:00");
+var raceStart_alt = new Date("Dec 9, 2017 5:00:00");
 console.log("begin...");
-var raceStart = Date.UTC(2017, 10, 23, 5, 0, 0, 0);
+var raceStart = Date.UTC(2017, 11, 9, 5, 0, 0, 0);
 
 var x = setInterval(function(){
   var now = new Date();
