@@ -1,6 +1,7 @@
 var raceStart_alt = new Date("Dec 9, 2017 5:00:00");
 console.log("begin...");
-var raceStart = Date.UTC(2017, 11, 9, 5, 0, 0, 0);
+var hourStart = 12
+var raceStart = Date.UTC(2017, 11, 4, hourStart, 0, 0, 0);
 
 var x = setInterval(function(){
   var now = new Date();
@@ -12,14 +13,18 @@ var x = setInterval(function(){
   else{
     var days = Math.abs(Math.floor(distance / (1000 * 60 * 60 * 24)));
   }
-  var hours = Math.abs(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)))-6;
+
   var minutes = Math.abs(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
   var seconds = Math.abs(Math.floor((distance % (1000 * 60)) / 1000));
   if (distance < 0){
+    var hours = Math.abs(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))) + 5;
     document.getElementById("timer").innerHTML = "Race Time: -" + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
   }
   else{
+    var hours = Math.abs(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))) - 6;
     document.getElementById("timer").innerHTML = "Race Time: " + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
   }
   if (now.getUTCHours() > 5){
     var now_hours = now.getUTCHours() - 6;
@@ -39,18 +44,34 @@ function digits(time){
 
 function AS(current, goal){
   var now = new Date();
-  var elapsed = Math.floor(now.getTime() - raceStart_alt);
-  var as2 = Math.floor(elapsed/current*goal);
-  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart_alt.getHours())%24;
-  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart_alt.getMinutes();
-  var seconds = Math.floor((as2 % (1000 * 60)) / 1000)+raceStart_alt.getSeconds();
-return hours + ":" + digits(minutes) + ":" + digits(seconds);
+  var utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+  var elapsed = utc - raceStart -21600000;
+  console.log("utc: " + utc);
+  console.log("start: " + raceStart);
+  console.log("Elapsed: " + elapsed + "ms");
+  var pace = Math.floor(elapsed/current*goal);
+  console.log("Pace: " + pace + "ms");
+  var hours = (Math.abs(Math.floor((pace % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))) + hourStart) % 24;
+  console.log(hours);
+  var minutes = Math.abs(Math.floor((pace % (1000 * 60 * 60)) / (1000 * 60)));
+  var seconds = Math.abs(Math.floor((pace % (1000 * 60)) / 1000));
+  return hours + ":" + digits(minutes) + ":" + digits(seconds);
+  //var now = new Date();
+  //var elapsed = Math.floor(now.getTime() - raceStart_alt);
+  //var as2 = Math.floor(elapsed/current*goal);
+  //var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart_alt.getHours())%24;
+  //var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart_alt.getMinutes();
+  //var seconds = Math.floor((as2 % (1000 * 60)) / 1000)+raceStart_alt.getSeconds();
+//return hours + ":" + digits(minutes) + ":" + digits(seconds);
+
 
 }
 
 function ASadj(current, goal){
   var now = new Date();
-  var elapsed = Math.floor(now.getTime() - raceStart_alt);
+  //var elapsed = Math.floor(now.getTime() - raceStart_alt);
+  var utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
+  var elapsed = utc - raceStart -21600000;
   if (goal < 33){
     var as2 = Math.floor(elapsed/current*goal);
   }
@@ -60,9 +81,9 @@ function ASadj(current, goal){
   else{
     var as2 = Math.floor(elapsed/current*goal*1.2);
   }
-  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+raceStart_alt.getHours())%24;
-  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60))+raceStart_alt.getMinutes();
-  var seconds = Math.floor((as2 % (1000 * 60)) / 1000)+raceStart_alt.getSeconds();
+  var hours = (Math.floor((as2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))+ hourStart) % 24;
+  var minutes = Math.floor((as2 % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((as2 % (1000 * 60)) / 1000);
   return hours + ":" + digits(minutes) + ":" + digits(seconds);
 }
 
@@ -155,9 +176,12 @@ function AS_plan(mile){
   var loc = mile;
   if (loc == 3.2){
     document.getElementById("as1n").style.setProperty("text-decoration", "line-through");
+    console.log("AS 3.2")
     document.getElementById("as1").innerHTML = AS(loc, 3.2);
+    console.log("AS 11.8")
     document.getElementById("as2").innerHTML = AS(loc, 11.8);
     document.getElementById("as2adj").innerHTML = ASadj(loc, 11.8);
+    console.log("End")
     document.getElementById("as3").innerHTML = AS(loc, 16.0);
     document.getElementById("as3adj").innerHTML = ASadj(loc, 16.0);
     document.getElementById("as4").innerHTML = AS(loc, 23.5);
