@@ -12,7 +12,12 @@ var x = setInterval(function(){
     var days = 0
   }
   else{
-    var days = Math.abs(Math.floor(distance / (1000 * 60 * 60 * 24)));
+    if(distance < 0){
+      var days = Math.abs(Math.ceil(distance / 1000 * 60 * 60 * 24)));
+    }
+    else{
+      var days = Math.abs(Math.floor(distance / (1000 * 60 * 60 * 24)));
+    }
   }
 
   var minutes = Math.abs(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
