@@ -9,7 +9,7 @@ var x = setInterval(function(){
   var utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), now.getUTCHours(), now.getUTCMinutes(), now.getUTCSeconds(), now.getUTCMilliseconds());
   var distance = utc - raceStart;
   if (distance/(1000*60*60*24) < 0 && distance/(1000*60*60*24) > -0.5){
-    var days = 0
+    var days = 0;
   }
   else{
     if(distance < 0){
